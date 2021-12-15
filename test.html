@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        <meta name="color-scheme" content="light dark">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+        <title>
+            主页
+        </title>
+        <link rel="stylesheet" href="/data/user/0/mark.via/files/homepage.css">
+        <style>
+            #search_engine_img{
+                width: auto;
+                height: auto;
+                max-width: 100%;
+                max-height: 100%;
+                position:fixed;
+                right:20px;
+                bottom: 20px;
+            }
+
+            #logo_img{
+                width: auto;
+                height: auto;
+                max-width: 70%;
+                max-height: 70%;
+            }
+            
+            /*
+
+            #img_span{
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                background-image: url(./img/google-search.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                padding-bottom:3px;
+            }
+
+            #search_type{
+                position: relative;
+                top: 5px;
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                padding-bottom:3px;
+                padding-right:7px;
+            }
+
+            #search_input{
+                position: relative;
+                right: 15px;
+            }
+
+
+            .search_span{
+                display: inline-block;
+            }
+
+            .search_bar{
+                font-size: 0px;
+
+                display: flex;
+            }*/
+
+            
+            </style>
+    </head>
+
+    <body>
+        <div class='frosted-glass'></div>
+        <div id="content">
+            <div class="search_part">
+                <a class="logo" onclick="window.via.cmd(257);" title="书签">
+                    <img id="logo_img" class="smaller" src="./img/logo.png" width="320">
+                </a>
+                <!--
+                <form onsubmit="return search()" class="search_bar" title="搜索" id=search_form>
+                    
+                    <input type="image" class="smaller" id="search_engine_img" name="google" src="./img/google-search.png" onclick="changeSearch()">
+                
+                    <span class="search_span">
+                        <input class="search" type="text" value="" autocomplete="off" id="search_input" title="搜索">
+                    </span>  
+                    <span class="search_span">    
+                        <input type="submit" id="search_submit" value="⠩" >
+                    </span>  
+                </form>
+                -->
+
+                <form onsubmit="return search()" class="search_bar" title="搜索">
+                    <button onclick="search()" id="search_submit" value="" aria-label="网页前进">
+                        <div class="search icon"></div>
+                    </button>
+                    <span>
+                        <input class="search" onfocus="showButton()" onblur="hideButton()" type="text" value="" autocomplete="off" id="search_input" title="搜索">
+                    </span>
+                </form>
+            </div>
+            <div>
+                <img id="search_engine_img" src="./img/google-search.png" onclick="changeSearch()" name="google">
+            </div>
+
+            <script type="text/javascript">
+                function changeSearch() {
+                    var a = document.getElementById("search_input").value
+                    var img = document.getElementById("search_engine_img")
+                    if (img.name == "google") {
+                        img.name = "baidu";
+                        img.src = "./img/baidu-search.png";
+                    }
+                    else {
+                        img.name = "google";
+                        img.src = "./img/google-search.png";
+                    }
+                }
+            </script>
+
+            <script type="text/javascript">
+                function showButton(){
+                    document.getElementById("search_submit").style.display="block"
+                }
+
+                function hideButton(){
+                    var a=document.getElementById("search_input").value;
+                    ""==a&&(document.getElementById("search_submit").style.display="none")
+                }
+
+                function search(){
+                    var a=document.getElementById("search_input").value;
+                    var type = document.getElementById("search_engine_img");
+                    //return""!=a&&(window.via.searchText(a),document.getElementById("search_input").value=""),!1
+                    if (a != "") {
+
+                        if (type.name == "google"){
+                            window.location.href="https://www.google.com/search?q="+a;
+                        }
+                        else {
+                            window.location.href="https://www.baidu.com/s?wd="+a;
+                        }
+                        
+                    }
+                    return false;
+                }
+            </script>
+
+            <script charset="gbk" src="file:///android_asset/opensug.js"></script>
+
+            <script type="text/javascript">
+                function show(str){
+                    var searchbox = document.getElementById("search_input"); 
+                    searchbox.innerHTML = str; searchbox.blur(); search();
+                } 
+                var params = {"XOffset":0, "YOffset":0, "fontColor":"#666666", "fontColorHI":"#FFF", 
+                        "fontSize":"14px", "borderColor":"#eee", "bgcolorHI":"#7B90E3", "sugSubmit":false }; 
+                BaiduSuggestion.bind("search_input",params,show); 
+            </script>
+        </div>
+    </body>
+</html>
